@@ -53,6 +53,8 @@ net.dns.setapdnsserver("8.8.8.8")
 
 **
 The new functions are exported in the "lwip/lwip_napt.h" header.
+The additional NAPT functionality is enabled by the options IP_FORWARD, IP_NAPT, and IP_NAPT_DYNAMIC in "lwipopts.h".
+
 used the work from this repo: https://github.com/martin-ger/esp-open-lwip
 **
 
