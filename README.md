@@ -1,4 +1,6 @@
-# **NodeMCU 1.5.4.1 final-ipforward enabled-manual dhcp in AP interface dhcp enabled** #
+# **NodeMCU 1.5.4.1 final** #
+
+ipforward enabled-manual dhcp in AP interface dhcp enabled
 
 how to use extra feature:
 
