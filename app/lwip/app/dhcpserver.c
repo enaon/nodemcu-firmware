@@ -26,6 +26,7 @@ static struct ip_addr broadcast_dhcps;
 static struct ip_addr server_address;
 static struct ip_addr client_address;//added
 static struct ip_addr client_address_plus;
+static struct ip_addr dns_address = {0};
 
 static struct dhcps_lease dhcps_lease;
 //static bool dhcps_lease_flag = true;
@@ -179,10 +180,10 @@ static uint8_t* ICACHE_FLASH_ATTR add_offer_options(uint8_t *optptr)
 #ifdef USE_DNS
 	    *optptr++ = DHCP_OPTION_DNS_SERVER;
 	    *optptr++ = 4;
-	    *optptr++ = ip4_addr1( &ipadd);
-		*optptr++ = ip4_addr2( &ipadd);
-		*optptr++ = ip4_addr3( &ipadd);
-		*optptr++ = ip4_addr4( &ipadd);
+	    *optptr++ = ip4_addr1( &dns_address);
+		*optptr++ = ip4_addr2( &dns_address);
+		*optptr++ = ip4_addr3( &dns_address);
+		*optptr++ = ip4_addr4( &dns_address);
 #endif
 
 #ifdef CLASS_B_NET
@@ -898,6 +899,10 @@ void ICACHE_FLASH_ATTR dhcps_start(struct ip_info *info)
 	IP4_ADDR(&broadcast_dhcps, 255, 255, 255, 255);
 
 	server_address = info->ip;
+	if (dns_address.addr == 0) {
+		dns_address = server_address;
+	}
+
 	wifi_softap_init_dhcps_lease(server_address.addr);
 	client_address_plus.addr = dhcps_lease.start_ip.addr;
 
@@ -1143,4 +1148,9 @@ bool ICACHE_FLASH_ATTR wifi_softap_reset_dhcps_lease_time(void)
 uint32 ICACHE_FLASH_ATTR wifi_softap_get_dhcps_lease_time(void) // minute
 {
     return dhcps_lease_time;
+}
+
+void ICACHE_FLASH_ATTR dhcps_set_DNS(struct ip_addr *dns_ip) 
+{
+    dns_address = *dns_ip;
 }

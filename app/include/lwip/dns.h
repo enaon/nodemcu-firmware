@@ -36,6 +36,13 @@
 
 #include "lwip/opt.h"
 
+/**
+ * Sets the dns ipaddr the AP dhcp server offers.
+ */
+void ICACHE_FLASH_ATTR
+dhcps_set_DNS(struct ip_addr *dns_ip);
+
+
 #if LWIP_DNS /* don't build if not configured for use in lwipopts.h */
 
 #ifdef __cplusplus

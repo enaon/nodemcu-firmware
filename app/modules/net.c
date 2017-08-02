@@ -1630,6 +1630,21 @@ static int net_setdnsserver( lua_State* L )
   return 0;
 }
 
+// Lua: s = net.dns.setapdnsserver(ip_addr)
+static int net_setapdnsserver( lua_State* L )
+{
+  size_t l;
+  u32_t ip32;
+
+  const char *server = luaL_checklstring( L, 1, &l );
+  if (l>16 || server == NULL || (ip32 = ipaddr_addr(server)) == IPADDR_NONE || ip32 == IPADDR_ANY)
+    return luaL_error( L, "invalid ip addr" );
+  ip_addr_t ipaddr;
+  ip4_addr_set_u32(&ipaddr, ip32);
+  dhcps_set_DNS(&ipaddr);
+  return 0;
+}
+
 // Lua: s = net.dns.getdnsserver([index])
 static int net_getdnsserver( lua_State* L )
 {
@@ -1725,6 +1740,7 @@ static const LUA_REG_TYPE net_cert_map[] = {
 
 static const LUA_REG_TYPE net_dns_map[] = {
   { LSTRKEY( "setdnsserver" ), LFUNCVAL( net_setdnsserver ) },  
+  { LSTRKEY( "setapdnsserver" ), LFUNCVAL( net_setapdnsserver ) },  
   { LSTRKEY( "getdnsserver" ), LFUNCVAL( net_getdnsserver ) }, 
   { LSTRKEY( "resolve" ),      LFUNCVAL( net_dns_static ) },  
   { LNILKEY, LNILVAL }
