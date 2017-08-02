@@ -51,9 +51,10 @@ example
 net.dns.setapdnsserver("8.8.8.8")
 
 
-
-used the work from this repo: https://github.com/wolfgangr/nodemcu-firmware
-
+**
+The new functions are exported in the "lwip/lwip_napt.h" header.
+used the work from this repo: https://github.com/martin-ger/esp-open-lwip
+**
 
 ## :no_entry: This branch is frozen at the last commit before the Espressif SDK was upgraded to 2.0 :no_entry:
 
