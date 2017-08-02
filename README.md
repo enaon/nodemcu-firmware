@@ -1,4 +1,24 @@
-# **NodeMCU 1.5.4.1 final** #
+# **NodeMCU 1.5.4.1 final-ipforward enabled-manual dhcp in AP interface dhcp enabled** #
+
+how to use extra feature:
+
+net.dns.setapdnsserver()
+Sets the IP of the DNS server offered from the Ap dhcp server to clients to resolve hostnames. 
+
+Syntax
+
+net.dns.setapdnsserver(dns_ip_addr)
+
+Parameters
+dns_ip_addr IP address of a DNS server
+
+Returns
+nil
+
+example
+net.dns.setapdnsserver("8.8.8.8")
+
+
 
 [![Join the chat at https://gitter.im/nodemcu/nodemcu-firmware](https://img.shields.io/gitter/room/badges/shields.svg)](https://gitter.im/nodemcu/nodemcu-firmware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/nodemcu/nodemcu-firmware.svg)](https://travis-ci.org/nodemcu/nodemcu-firmware)
