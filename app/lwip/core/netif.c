@@ -180,6 +180,10 @@ netif_add(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
   netif->loop_cnt_current = 0;
 #endif /* ENABLE_LOOPBACK && LWIP_LOOPBACK_MAX_PBUFS */
 
+#if IP_NAPT
+  netif->napt = 0;
+#endif /* IP_NAPT */
+
   netif_set_addr(netif, ipaddr, netmask, gw);
 
   /* call user specified initialization function for netif */

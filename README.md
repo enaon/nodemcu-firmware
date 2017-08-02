@@ -5,9 +5,34 @@
 [![Documentation Status](https://img.shields.io/badge/docs-1.5.4.1_final-yellow.svg?style=flat)](http://nodemcu.readthedocs.io/en/1.5.4.1-final/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/nodemcu/nodemcu-firmware/blob/master/LICENSE)
 
-ipforward enabled-manual dhcp in AP interface dhcp enabled
+*napt enabled
+*ipforward enabled
+*manual dhcp in AP interface dhcp enabled
 
 how to use extra feature:
+
+** Use nat router (must be in STATIONAP mode)
+
+net.ip.naptinit()
+Allocates the memory for the NAPT tables. Do only once after reset, there are no checks at the present.
+
+returns
+nil
+
+net.ip.natp(ap_ip_addr, enable)
+
+Parameters
+ap_ip_addr IP address of a AP interface (incoming interface)
+enable - 0 to disable nat, 1 to enable nat (range 0~1).
+
+returns
+nil
+
+example
+net.ip.napt("192.168.4.1",1)
+
+
+** set the dns server the Ad dhcp server offers to client.
 
 net.dns.setapdnsserver()
 Sets the IP of the DNS server offered from the Ap dhcp server to clients to resolve hostnames. 

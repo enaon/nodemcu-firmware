@@ -13,6 +13,7 @@
 #include "lwip/ip_addr.h"
 #include "espconn.h"
 #include "lwip/dns.h" 
+#include "lwip/lwip_napt.h"
 
 #define TCP ESPCONN_TCP
 #define UDP ESPCONN_UDP
@@ -1645,6 +1646,35 @@ static int net_setapdnsserver( lua_State* L )
   return 0;
 }
 
+
+// Lua: s = net.ip.napt(ip_addr, [index])
+static int net_napt( lua_State* L )
+{
+  size_t l;
+  u32_t ip32;
+
+  const char *server = luaL_checklstring( L, 1, &l );
+  if (l>16 || server == NULL || (ip32 = ipaddr_addr(server)) == IPADDR_NONE || ip32 == IPADDR_ANY)
+    return luaL_error( L, "invalid ip addr" );
+
+  int enable = luaL_optint(L, 2, 0);
+  if (enable >= 2)
+    return luaL_error( L, "enter 1 for enable 0 for disable");
+
+  ip_addr_t ipaddr;
+  ip4_addr_set_u32(&ipaddr, ip32);
+  ip_napt_enable(ip32, enable);
+  return 0;
+}
+
+// Lua: s = net.ip.naptinit()
+static int net_naptinit( lua_State* L )
+{
+  ip_napt_init(IP_NAPT_MAX, IP_PORTMAP_MAX);	
+  return 1;
+}
+
+
 // Lua: s = net.dns.getdnsserver([index])
 static int net_getdnsserver( lua_State* L )
 {
@@ -1746,12 +1776,19 @@ static const LUA_REG_TYPE net_dns_map[] = {
   { LNILKEY, LNILVAL }
 };
 
+static const LUA_REG_TYPE net_ip_map[] = {
+  { LSTRKEY( "napt" ),         LFUNCVAL( net_napt ) }, 
+  { LSTRKEY( "naptinit" ),         LFUNCVAL( net_naptinit ) }, 
+  { LNILKEY, LNILVAL }
+};
+
 static const LUA_REG_TYPE net_map[] = {
   { LSTRKEY( "createServer" ),     LFUNCVAL( net_createServer ) },
   { LSTRKEY( "createConnection" ), LFUNCVAL( net_createConnection ) },
   { LSTRKEY( "multicastJoin"),     LFUNCVAL( net_multicastJoin ) },
   { LSTRKEY( "multicastLeave"),    LFUNCVAL( net_multicastLeave ) },
   { LSTRKEY( "dns" ),              LROVAL( net_dns_map ) },
+  { LSTRKEY( "ip" ),               LROVAL( net_ip_map ) },
 #ifdef CLIENT_SSL_ENABLE
   { LSTRKEY( "cert" ),             LROVAL(net_cert_map) },
 #endif

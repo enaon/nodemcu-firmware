@@ -499,6 +499,22 @@
 #endif
 
 /**
+ * IP_NAPT==1: Enables the ability to do Network Address Port Translation (NAPT) 
+ * on forwarded packets. This only makes sense with IP_FORWARD==1.
+ */
+#ifndef IP_NAPT
+#define IP_NAPT                         1
+#endif
+
+/**
+ * IP_NAPT_DYNAMIC==1: Saves the memory for the NAPT tables if not required.
+ * If NAPT is used, ip_napt_init() has to be called explicitly once.
+ */
+#ifndef IP_NAPT_DYNAMIC
+#define IP_NAPT_DYNAMIC                 1
+#endif
+
+/**
  * IP_OPTIONS_ALLOWED: Defines the behavior for IP options.
  *      IP_OPTIONS_ALLOWED==0: All packets with IP options are dropped.
  *      IP_OPTIONS_ALLOWED==1: IP options are allowed (but not parsed).
@@ -1050,6 +1066,11 @@
 #ifndef TCP_WND_UPDATE_THRESHOLD
 #define TCP_WND_UPDATE_THRESHOLD   (TCP_WND / 4)
 #endif
+
+/**
+ * 2 * TCP_MSL defines duration of socket TIME-WAIT state in ms.
+ */
+#define TCP_MSL 2500UL
 
 /**
  * LWIP_EVENT_API and LWIP_CALLBACK_API: Only one of these should be set to 1.
@@ -2063,5 +2084,6 @@
 #ifndef DNS_DEBUG
 #define DNS_DEBUG                       LWIP_DBG_OFF
 #endif
+
 
 #endif /* __LWIP_OPT_H__ */
