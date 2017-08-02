@@ -1,5 +1,10 @@
 # **NodeMCU 1.5.4.1 final** #
 
+[![Join the chat at https://gitter.im/nodemcu/nodemcu-firmware](https://img.shields.io/gitter/room/badges/shields.svg)](https://gitter.im/nodemcu/nodemcu-firmware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/nodemcu/nodemcu-firmware.svg)](https://travis-ci.org/nodemcu/nodemcu-firmware)
+[![Documentation Status](https://img.shields.io/badge/docs-1.5.4.1_final-yellow.svg?style=flat)](http://nodemcu.readthedocs.io/en/1.5.4.1-final/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/nodemcu/nodemcu-firmware/blob/master/LICENSE)
+
 ipforward enabled-manual dhcp in AP interface dhcp enabled
 
 how to use extra feature:
@@ -22,10 +27,8 @@ net.dns.setapdnsserver("8.8.8.8")
 
 
 
-[![Join the chat at https://gitter.im/nodemcu/nodemcu-firmware](https://img.shields.io/gitter/room/badges/shields.svg)](https://gitter.im/nodemcu/nodemcu-firmware?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/nodemcu/nodemcu-firmware.svg)](https://travis-ci.org/nodemcu/nodemcu-firmware)
-[![Documentation Status](https://img.shields.io/badge/docs-1.5.4.1_final-yellow.svg?style=flat)](http://nodemcu.readthedocs.io/en/1.5.4.1-final/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/nodemcu/nodemcu-firmware/blob/master/LICENSE)
+used the work from this repo: https://github.com/wolfgangr/nodemcu-firmware
+
 
 ## :no_entry: This branch is frozen at the last commit before the Espressif SDK was upgraded to 2.0 :no_entry:
 
