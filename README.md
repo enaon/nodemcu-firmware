@@ -32,7 +32,7 @@ example
 net.ip.napt("192.168.4.1",1)
 
 
-** set the dns server the Ad dhcp server offers to client.
+** set the dns server the AP dhcp server offers to client.
 
 net.dns.setapdnsserver()
 Sets the IP of the DNS server offered from the Ap dhcp server to clients to resolve hostnames. 
